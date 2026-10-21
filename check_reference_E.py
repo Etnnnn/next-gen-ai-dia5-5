@@ -120,7 +120,18 @@ def main():
 
     print("\n" + ("Tout concorde. Faire vérifier par un autre membre, puis montrer à l'enseignant."
                   if all_ok else "ATTENTION : au moins une différence, ne rien enregistrer avant d'avoir compris."))
-
+    
+     # --- 5. Écriture de reference_E.csv (case_id, sql, revenue_cents) --------
+    if all_ok:
+        out = KIT / "reference_E.csv"
+        with open(out, "w", encoding="utf-8", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["case_id", "sql", "revenue_cents"])
+            for qid, sql in QUERIES.items():
+                writer.writerow([qid, sql + ";", sql_values[qid]])
+        print(f"\nFichier écrit : {out}")
+    else:
+        print("\nreference_E.csv NON écrit tant que SQL et CSV ne concordent pas.")
 
 if __name__ == "__main__":
     main()
