@@ -1,0 +1,2 @@
+# Keep files byte-identical to the kit: the CSV and manifest hashes are checked by verify-data.py.
+* -text
