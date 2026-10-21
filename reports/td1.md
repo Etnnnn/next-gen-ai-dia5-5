@@ -13,3 +13,11 @@ Each member computes the references of their questions in `reference-<role>.csv`
 | C | C02, C08, C09, C11 | `reference-C.csv`, queries in `refs/` | Python recomputation from `data/*.csv` with a hand-written completed-age function; boundary customers (C001-C007, born one day apart) checked | D | match (same four values) |
 | D | C03, C10, C14, C18 | `reference-D.csv` | `validate_role_d.py` | C | match (same four values): C recomputed them blind, with a different SQL age formula (date shifts instead of year/month-day arithmetic) and in Python from `data/*.csv` |
 | E | C15, C16, C17, C19 | `reference_E.csv` | `check_reference_E.py` | A | match |
+
+`reference-td1.csv` holds the twenty queries and values, with who wrote and who cross-checked each one (`written_by`, `checked_by`).
+
+### Comparison with the published values
+
+The instructor published the twenty reference values on 21/10/2026 during the session ([TD 1: the twenty reference values](https://storage.googleapis.com/docs.g.quanticfactory.io/ESILV/next-generation-ai/latest/students/reference-values-td1-en.html), pack 2026-10-18-students-1). We compared them only after our own computation and cross-checks.
+
+Result: **20/20 identical on the first attempt, no correction needed.** Each value is produced by the query stored next to it in `reference-td1.csv`; re-running all twenty queries on `data/boutique.sqlite` (opened read-only) gives back the stored values.
