@@ -1,4 +1,8 @@
-# Next-Generation AI (Trustworthy GenAI): DIA5, sub-group 5
+# Next-Generation AI (Trustworthy GenAI): DIA5-G5
+
+- DIA class: **DIA5**
+- Sub-group: **DIA5-G5**
+- Members: Kerry Assohoun, Sam Olivares, Etienne Padelo, Armand Bussolino, Shayan Karimi
 
 ESILV A4, module Next-Generation AI, 2026-27. Repository shared by the sub-group from TD 1 to TD 3.
 
