@@ -6,10 +6,10 @@ C04,,
 C05,,
 C06,,
 C07,,
-C08,,
-C09,,
+C08,"SELECT COALESCE(SUM(o.quantity_product * p.price), 0) AS revenue_cents FROM orders o JOIN product p ON p.product_id = o.product_id JOIN customers c ON c.customer_id = o.customer_id WHERE c.birth_date <= date('2026-09-24', '-25 years') AND c.birth_date > date('2026-09-24', '-26 years')",605580
+C09,"SELECT COALESCE(SUM(o.quantity_product * p.price), 0) AS revenue_cents FROM orders o JOIN product p ON p.product_id = o.product_id JOIN customers c ON c.customer_id = o.customer_id WHERE c.birth_date <= date('2026-09-26', '-25 years') AND c.birth_date > date('2026-09-26', '-26 years')",487980
 C10,,
-C11,,
+C11,"SELECT COALESCE(SUM(o.quantity_product * p.price), 0) AS revenue_cents FROM orders o JOIN product p ON p.product_id = o.product_id JOIN customers c ON c.customer_id = o.customer_id WHERE c.birth_date <= date('2026-12-01', '-25 years') AND c.birth_date > date('2026-12-01', '-26 years')",446690
 C12,,
 C13,,
 C14,,
