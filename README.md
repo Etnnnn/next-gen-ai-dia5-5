@@ -6,12 +6,13 @@ ESILV A4, module Next-Generation AI, 2026-27. Repository shared by the sub-group
 
 | Role (TD 1) | Member | Task |
 |---|---|---|
-| A | _to fill_ | Groq, `openai/gpt-oss-120b` |
-| B | _to fill_ | Groq, `openai/gpt-oss-20b` |
-| C | _to fill_ | OpenRouter, `cohere/north-mini-code:free` |
-| D | _to fill_ | Groq, `qwen/qwen3.8-27b` |
-| E | _to fill_ | OpenRouter, `dots-studio/dots-3-note-preview:free` |
-| F | _to fill_ | Reference cross-check, trace merge, summaries |
+| A | Kerry | Groq, `openai/gpt-oss-120b` |
+| B | Sam | Groq, `openai/gpt-oss-20b` |
+| C | Etienne | OpenRouter, `cohere/north-mini-code:free`; consolidates references, traces and summaries |
+| D | Armand | Groq, `qwen/qwen3.8-27b` |
+| E | Shayan | OpenRouter, `dots-studio/dots-3-note-preview:free` |
+
+Five members: the protocol's F-H role (cross-checking, merging, summaries) is shared, each operator cross-checking another's references (A-B, C-D, E-A).
 
 Instructor: Paul Gabriel. Roles rotate in TD 2 and TD 3.
 
