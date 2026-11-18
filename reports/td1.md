@@ -8,7 +8,7 @@ Sub-group DIA5-G5 (Kerry Assohoun, Sam Olivares, Etienne Padelo, Armand Bussolin
 |---|---|---|
 | 1. Twenty reference queries, each cross-checked by another member | yes, 20/20 equal to the published values on the first attempt | [`reference-td1.csv`](../reference-td1.csv), `reference-<role>.csv`, check scripts |
 | 2. Five models on the twenty questions, one trace line per call | yes, 100 cells, 103 attempts, all real calls | [`traces-td1.csv`](../traces-td1.csv), [`traces-td1.jsonl`](../traces-td1.jsonl), `traces-<role>.csv`, `state-<role>.jsonl` |
-| 3. Reading the traces, the two summaries | yes | [`model-question-comparison-en.csv`](../model-question-comparison-en.csv), [`five-model-summary-en.csv`](../five-model-summary-en.csv) |
+| 3. Reading the traces, the two summaries | yes | [`model-question-comparison-en.csv`](../td1/results/model-question-comparison-en.csv), [`five-model-summary-en.csv`](../td1/results/five-model-summary-en.csv) |
 | Prompts, verbatim | yes, unchanged during the session | [`prompts-en.md`](../prompts-en.md) |
 
 Observed facts (read from the files) and hypotheses about causes are kept apart below; hypotheses are marked as such.
@@ -45,7 +45,7 @@ Result: **20/20 identical on the first attempt, no correction needed.** Each val
 - Batch: 100 cells (5 models x 20 questions), **60 Groq and 40 OpenRouter initial calls**, plus 3 retries on Groq: 103 attempts, all `nature = real`. No replayed or simulated line.
 - Each operator ran their own model with their own key, one request at a time, through `skeleton-multi-llm-en.py --run` (temperature 0, capped output, 45 s timeout, 3 s pause, at most one retry per cell). Calls between 13:32 and 13:59 UTC (15:32 to 15:59 Paris time).
 - The prompt is the same for the five models: `merge_traces.py` checks that each question has **one single `prompt_sha256`** across all 103 attempts, and `prompts-en.md` recomputes the twenty fingerprints from the skeleton's system and user prompts.
-- `traces-td1.csv` merges the five raw CSV files under one header; `traces-td1.jsonl` is the same merge of the five `state-<role>.jsonl` files. `python merge_traces.py --check` confirms that the two hold the same rows and that every final status of the comparison table is the verdict of the last attempt of its cell.
+- `traces-td1.csv` merges the five raw CSV files under one header; `traces-td1.jsonl` is the same merge of the five `state-<role>.jsonl` files. `python td1/merge_traces.py --check` confirms that the two hold the same rows and that every final status of the comparison table is the verdict of the last attempt of its cell.
 - Offline replay (`skeleton-multi-llm-en.py --replay traces-td1.jsonl`, separate `nature = replay` files, not committed) re-executes every stored SQL on the local base. It gives the same verdict for each of the 100 cells, so the results do not depend on the machine that ran the calls.
 
 ## Results
@@ -133,7 +133,7 @@ On this batch only: every model is enough for period and product-list questions,
 
 ## Next steps (TD 2, 18/11/2026)
 
-- Roles rotate. Read `atelier-vote.py` and `enonce-td2-en.md` before the session.
+- Roles rotate. Read `atelier-vote.py` and `docs/kit/enonce-td2-en.md` before the session.
 - Write `vote_k_sur_n` in `skeleton-multi-llm-en.py` and run `atelier-vote.py --traces traces-td1.csv` on the twenty questions.
 - Wrong consensus: check C10 and C19 with the fixed panel, then explain the cause in the SQL and an independent check that detects it.
 - Routing rule: one line per family, justified by the cells above. Then run `atelier-routage.py` before and after adapting it.

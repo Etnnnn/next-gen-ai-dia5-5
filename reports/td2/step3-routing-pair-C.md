@@ -1,6 +1,6 @@
 # TD 2, Step 3 (Pair C): the routing rule
 
-Section to be merged into `reports/td2.md`. Sources: [`model-question-comparison-en.csv`](../model-question-comparison-en.csv) (status of every TD 1 cell), [`questions-td1.json`](../questions-td1.json) (family of every question), [`five-model-summary-en.csv`](../five-model-summary-en.csv) and [`portefeuille-modeles-2026-09-28.csv`](../portefeuille-modeles-2026-09-28.csv) (prices, routes). No new network call.
+Section of `reports/td2.md` written by pair C. Sources: [`model-question-comparison-en.csv`](../../td1/results/model-question-comparison-en.csv) (status of every TD 1 cell), [`questions-td1.json`](../../questions-td1.json) (family of every question), [`five-model-summary-en.csv`](../../td1/results/five-model-summary-en.csv) and [`portefeuille-modeles-2026-09-28.csv`](../../docs/kit/portefeuille-modeles-2026-09-28.csv) (prices, routes). No new network call.
 
 ## 1. Exact TD 1 rates per family
 
@@ -16,7 +16,7 @@ Families come from the `type` field of `questions-td1.json`. A cell counts as co
 | F2+F3 | C16 | **1/1** | 1/1 | 0/1 | 0/1 | 1/1 |
 | F1+F2+F3 | C17 C19 | **2/2** | 2/2 | 0/2 | 0/2 | 0/2 (C19 sql_invalid) |
 | F1+F2b | C18 | **1/1** | 1/1 | 0/1 (429, not executed) | 1/1 | 0/1 |
-| **Total** | 20 | 20/20 | 17/20 | 13/20 (+1 not executed) | 11/20 | 15/20 |
+| **Total** | 20 | 20/20 | 17/20 | 13/20 (+1 not executed) | 11/20 | 14/20 |
 
 **Eligibility choice (stricter than the raw table).** A combined family has 1 or 2 cells, so 1/1 is weak evidence. A model is eligible for a combination only if it is 100 % on the combination **and** on each component family. So gpt-oss-20b (1/4 on F2) and Dots (2/4 on F2) are *not* eligible on F1+F2 or F2+F3, even though they got C15/C16 right. Result:
 
@@ -40,7 +40,7 @@ Cost per request on a paid route, with the mean TD 1 token envelope: gpt-oss-20b
 |---|---|---|---|---|---|
 | F1 period | gpt-oss-20b (Groq free), 6/6 | none (20b 6/6) | 2-of-3 quorum 20b / 120b / qwen (all 6/6) | 3-of-5 quorum + reference query | next free model (120b, qwen, …): 5 models are 6/6 |
 | F3 product list | gpt-oss-20b (Groq free), 4/4 | none (20b 4/4) | 2-of-3 quorum 20b / 120b / qwen (all 4/4) | 3-of-5 quorum + reference query | next free model: 5 models are 4/4 |
-| F2 age on a date | gpt-oss-120b (Groq free), 4/4, only eligible model | none (120b 4/4) | deterministic check against the reference template (`refs/C11.sql`: `birth_date <= date(D,'-25 years') AND > date(D,'-26 years')`) | reference query + human review | defer to the Groq refill if the request can wait, else paid OpenRouter route of gpt-oss-120b, else **abstain** |
+| F2 age on a date | gpt-oss-120b (Groq free), 4/4, only eligible model | none (120b 4/4) | deterministic check against the reference template (`td1/references/refs/C11.sql`: `birth_date <= date(D,'-25 years') AND > date(D,'-26 years')`) | reference query + human review | defer to the Groq refill if the request can wait, else paid OpenRouter route of gpt-oss-120b, else **abstain** |
 | F2b age at the order | gpt-oss-120b, 1/1 | none (120b 1/1) | deterministic check (reference age-at-order formula, C10) | reference query + human review | gpt-oss-20b (1/1) or its paid route, else defer, else abstain |
 | F1+F2, F2+F3, F1+F2+F3 | gpt-oss-120b, 1/1, 1/1, 2/2 | none | deterministic check | reference query + human review | defer, else paid 120b, else abstain. **No quorum**: C19 shows a wrong 2-of-3 consensus |
 | F1+F2b | gpt-oss-120b, 1/1 | none | deterministic check | reference query + human review | gpt-oss-20b (1/1), then defer, paid route, abstain |
@@ -53,8 +53,8 @@ Consistency with the constraint: `none` is used only for the internal dashboard 
 
 ## 3. Simulator before and after adaptation
 
-- Before: original file kept as [`td2-evidence/atelier-routage-original.py`](td2-evidence/atelier-routage-original.py), output in [`td2-evidence/routage-avant.jsonl`](td2-evidence/routage-avant.jsonl) (7 scenarios, 3 fictitious resources).
-- After: [`atelier-routage.py`](../atelier-routage.py) adapted, output in [`td2-evidence/routage-apres.jsonl`](td2-evidence/routage-apres.jsonl).
+- Before: original file kept as [`atelier-routage-original.py`](atelier-routage-original.py), output in [`routage-avant.jsonl`](routage-avant.jsonl) (7 scenarios, 3 fictitious resources).
+- After: [`atelier-routage.py`](../../atelier-routage.py) adapted, output in [`routage-apres.jsonl`](routage-apres.jsonl).
 
 What changed: `RESOURCES` holds the five TD 1 free routes plus the paid OpenRouter routes of gpt-oss-20b and gpt-oss-120b. The single `level` was replaced by the list of families where the model is eligible (computed from the TD 1 table). `request` now carries `family` and `use` (dashboard / customer / payout). `checks` follows the rule above. Every `reason` cites the TD 1 rate and cells. **The priority order of `choose` is unchanged.**
 

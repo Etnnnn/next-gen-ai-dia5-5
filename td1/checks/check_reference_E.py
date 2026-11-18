@@ -12,7 +12,7 @@ import sqlite3
 from datetime import date
 from pathlib import Path
 
-KIT = Path(__file__).resolve().parent
+KIT = Path(__file__).resolve().parents[2]  # repository root
 DATA = KIT / "data"
 DB = DATA / "boutique.sqlite"
 
@@ -123,7 +123,7 @@ def main():
     
      # --- 5. Écriture de reference_E.csv (case_id, sql, revenue_cents) --------
     if all_ok:
-        out = KIT / "reference_E.csv"
+        out = KIT / "td1" / "references" / "reference_E.csv"
         with open(out, "w", encoding="utf-8", newline="") as f:
             writer = csv.writer(f)
             writer.writerow(["case_id", "sql", "revenue_cents"])

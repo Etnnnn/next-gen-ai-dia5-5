@@ -2,19 +2,19 @@
 """TD 2 (Pair C): routing simulator adapted to the sub-group's routing rule.
 
 Synthetic decisions, no API call, no key. The original supplied version is kept
-in reports/td2-evidence/atelier-routage-original.py and its output in
-reports/td2-evidence/routage-avant.jsonl.
+in reports/td2/atelier-routage-original.py and its output in
+reports/td2/routage-avant.jsonl.
 
 What changed compared with the supplied simulator:
 - RESOURCES are the five TD 1 models (free routes actually used in TD 1) plus
   the paid OpenRouter routes of the same models, priced from
-  portefeuille-modeles-2026-09-28.csv / five-model-summary-en.csv.
+  docs/kit/portefeuille-modeles-2026-09-28.csv / td1/results/five-model-summary-en.csv.
 - Eligibility is no longer a single "level": each resource lists the question
   families on which it was 100 % correct in TD 1, with the cells as evidence
-  (model-question-comparison-en.csv). A combined family is eligible only if the
+  (td1/results/model-question-comparison-en.csv). A combined family is eligible only if the
   model is 100 % on the combination AND on each of its component families.
 - The checking depends on the family and on the use (dashboard, customer,
-  payout), as written in the routing rule of reports/td2.md.
+  payout), as written in the routing rule of reports/td2/step3-routing-pair-C.md.
 - The priority order of choose() is unchanged: included capacity, then
   deferral to a free route that refills before the deadline, then a paid route
   within the budget, then abstention.
@@ -99,7 +99,7 @@ def checks_for(request, chosen_model):
         return "none (internal dashboard, %s %s on %s)" % (chosen_model, TD1[chosen_model][family], family)
     if use == "customer":
         if family in AGE_FAMILIES:
-            return "deterministic check against the reference SQL template (refs/) before display"
+            return "deterministic check against the reference SQL template (td1/references/refs/) before display"
         return "2-of-3 quorum (gpt-oss-20b, gpt-oss-120b, qwen3.8-27b: 100 %% on %s)" % family
     # payout
     if family in AGE_FAMILIES:

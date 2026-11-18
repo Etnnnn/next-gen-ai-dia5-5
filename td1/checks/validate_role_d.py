@@ -13,7 +13,7 @@ from pathlib import Path
 
 import sandbox_sqlite
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]  # repository root
 OUT = ROOT / 'evidence' / 'role-D'
 ASSIGNED = {3, 10, 14, 18}
 PEER_C = {2, 8, 9, 11}
@@ -131,11 +131,11 @@ def main():
                 matching = [r for r in refs if r['case_id'] == row['case_id']]
                 if matching:
                     assert int(row['revenue_cents']) == matching[0]['revenue_cents'], row
-    with (ROOT / 'reference-D.csv').open('w', newline='', encoding='utf-8') as stream:
+    with (ROOT / 'td1' / 'references' / 'reference-D.csv').open('w', newline='', encoding='utf-8') as stream:
         writer = csv.DictWriter(stream, fieldnames=['case_id', 'sql', 'revenue_cents'], lineterminator='\n')
         writer.writeheader()
         writer.writerows(r for r in refs if int(r['case_id'][1:]) in ASSIGNED)
-    with (ROOT / 'cross-check-C-by-D.csv').open('w', newline='', encoding='utf-8') as stream:
+    with (ROOT / 'td1' / 'references' / 'cross-check-C-by-D.csv').open('w', newline='', encoding='utf-8') as stream:
         writer = csv.DictWriter(stream, fieldnames=['case_id', 'sql', 'revenue_cents'], lineterminator='\n')
         writer.writeheader()
         writer.writerows(r for r in refs if int(r['case_id'][1:]) in PEER_C)

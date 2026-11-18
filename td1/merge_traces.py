@@ -4,8 +4,8 @@
 Merge the TD 1 state files of the five operators into `traces-td1.jsonl`,
 then check it against `traces-td1.csv` and the comparison table.
 
-    python merge_traces.py           # writes traces-td1.jsonl, prints the checks
-    python merge_traces.py --check   # checks only, writes nothing
+    python td1/merge_traces.py           # writes traces-td1.jsonl, prints the checks
+    python td1/merge_traces.py --check   # checks only, writes nothing
 
 Every attempt is kept, in the order of the operators (A to E) and of the
 calls. The checks: same rows as `traces-td1.csv`, one prompt fingerprint per
@@ -23,11 +23,11 @@ import json
 import sys
 from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
-STATES = [HERE / f"state-{role}.jsonl" for role in "ABCDE"]
+HERE = Path(__file__).resolve().parents[1]  # repository root
+STATES = [HERE / "td1" / "traces" / f"state-{role}.jsonl" for role in "ABCDE"]
 OUT_JSONL = HERE / "traces-td1.jsonl"
 CSV_MERGED = HERE / "traces-td1.csv"
-COMPARISON = HERE / "model-question-comparison-en.csv"
+COMPARISON = HERE / "td1" / "results" / "model-question-comparison-en.csv"
 
 
 def as_text(value) -> str:
