@@ -624,7 +624,34 @@ class Orchestrateur:
         families, and look in your traces for a case where several models agree
         on a wrong value.
         """
-        raise NotImplementedError("vote_k_sur_n: to implement in TD 2 (see the procedure in the docstring).")
+        # `self` is not used: atelier-vote.py calls the method unbound (self=None).
+        proposals = list(traces_question)
+        n = len(proposals)
+
+        # Rule 2: strict majority of the whole panel, unavailable members included.
+        if isinstance(k, bool) or not isinstance(k, int) or not (n // 2 < k <= n):
+            raise ValueError(f"k={k!r} is not a strict majority of n={n}: need {n // 2} < k <= {n}.")
+
+        # Rule 3: one vote per (provider, model_requested) pair.
+        seen = set()
+        for p in proposals:
+            key = (p.provider, p.model_requested)
+            if key in seen:
+                raise ValueError(f"Duplicate proposal for {key[0]}:{key[1]}: a duplicate is not a second vote.")
+            seen.add(key)
+
+        # Rule 1: only executed proposals with a value vote; the others stay in n.
+        ballots: dict = {}
+        for p in proposals:
+            if p.verdict == "executed" and p.value is not None:
+                ballots.setdefault(p.value, []).append(f"{p.provider}:{p.model_requested}")
+
+        # Rules 4 and 5. With k a strict majority, at most one value can reach k.
+        best = max((len(m) for m in ballots.values()), default=0)
+        for value, models in ballots.items():
+            if len(models) >= k:
+                return {"consensus": True, "value": value, "votes": len(models), "models": models}
+        return {"consensus": False, "value": None, "votes": best, "models": []}
 
 
 # ==========================================================================

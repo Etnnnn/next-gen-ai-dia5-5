@@ -1,0 +1,21 @@
+case_id,ballots_5,vote_2of3,ref_ok_2of3,vote_3of5,ref_ok_3of5,reference,changed
+C01,"120b=792800, cohere=792800, qwen=792800, 20b=792800, dots=792800",consensus 792800 (3 votes),yes,consensus 792800 (5 votes),yes,792800,
+C02,"120b=590320, cohere=sql_invalid, qwen=590320, 20b=0, dots=135000",consensus 590320 (2 votes),yes,abstain (max 2),-,590320,yes
+C03,"120b=936350, cohere=936350, qwen=936350, 20b=936350, dots=936350",consensus 936350 (3 votes),yes,consensus 936350 (5 votes),yes,936350,
+C04,"120b=2826250, cohere=2826250, qwen=2826250, 20b=2826250, dots=2826250",consensus 2826250 (3 votes),yes,consensus 2826250 (5 votes),yes,2826250,
+C05,"120b=38480, cohere=38480, qwen=38480, 20b=38480, dots=38480",consensus 38480 (3 votes),yes,consensus 38480 (5 votes),yes,38480,
+C06,"120b=0, cohere=0, qwen=0, 20b=0, dots=0",consensus 0 (3 votes),yes,consensus 0 (5 votes),yes,0,
+C07,"120b=13970, cohere=13970, qwen=13970, 20b=13970, dots=13970",consensus 13970 (3 votes),yes,consensus 13970 (5 votes),yes,13970,
+C08,"120b=605580, cohere=0, qwen=605580, 20b=605580, dots=605580",consensus 605580 (2 votes),yes,consensus 605580 (4 votes),yes,605580,
+C09,"120b=487980, cohere=sql_invalid, qwen=0, 20b=399610, dots=47900",abstain (max 1),-,abstain (max 1),-,487980,
+C10,"120b=558980, cohere=119410, qwen=119410, 20b=558980, dots=119410",consensus 119410 (2 votes),**no**,consensus 119410 (3 votes),**no**,558980,
+C11,"120b=446690, cohere=0, qwen=446690, 20b=322160, dots=446690",consensus 446690 (2 votes),yes,consensus 446690 (3 votes),yes,446690,
+C12,"120b=1666490, cohere=1666490, qwen=1666490, 20b=1666490, dots=1666490",consensus 1666490 (3 votes),yes,consensus 1666490 (5 votes),yes,1666490,
+C13,"120b=107740, cohere=107740, qwen=107740, 20b=107740, dots=107740",consensus 107740 (3 votes),yes,consensus 107740 (5 votes),yes,107740,
+C14,"120b=0, cohere=0, qwen=0, 20b=0, dots=0",consensus 0 (3 votes),yes,consensus 0 (5 votes),yes,0,
+C15,"120b=168680, cohere=314020, qwen=0, 20b=168680, dots=168680",abstain (max 1),-,consensus 168680 (3 votes),yes,168680,yes
+C16,"120b=376740, cohere=595500, qwen=367050, 20b=376740, dots=376740",abstain (max 1),-,consensus 376740 (3 votes),yes,376740,yes
+C17,"120b=258180, cohere=371990, qwen=248490, 20b=258180, dots=152730",abstain (max 1),-,abstain (max 2),-,258180,
+C18,"120b=62480, cohere=62480, qwen=not_executed, 20b=62480, dots=39580",consensus 62480 (2 votes),yes,consensus 62480 (3 votes),yes,62480,
+C19,"120b=1990, cohere=83580, qwen=83580, 20b=1990, dots=sql_invalid",consensus 83580 (2 votes),**no**,abstain (max 2),-,1990,yes
+C20,"120b=1106090, cohere=1106090, qwen=1106090, 20b=1106090, dots=1106090",consensus 1106090 (3 votes),yes,consensus 1106090 (5 votes),yes,1106090,
