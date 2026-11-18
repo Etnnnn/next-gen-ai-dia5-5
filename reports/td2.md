@@ -7,7 +7,7 @@ Sub-group DIA5-G5 (Kerry Assohoun, Sam Olivares, Etienne Padelo, Armand Bussolin
 | Step | Pair | Completed | Evidence |
 |---|---|---|---|
 | 1. k-of-n vote, 2-of-3 vs 3-of-5 on the twenty questions | A (Shayan, Etienne) | yes | [`skeleton-multi-llm-en.py`](../skeleton-multi-llm-en.py) (`Orchestrateur.vote_k_sur_n`), [`td2_vote_table.py`](../td2_vote_table.py), [`vote-td2-2of3-vs-3of5.csv`](../vote-td2-2of3-vs-3of5.csv) |
-| 2. Wrong consensus | B | _to do_ | |
+| 2. Wrong consensus | B | yes | [`reports/td2/step2-wrong-consensus-pair-B.md`](td2/step2-wrong-consensus-pair-B.md) |
 | 3. Routing rule | C | yes | [`reports/td2/step3-routing-pair-C.md`](td2/step3-routing-pair-C.md), [`atelier-routage.py`](../atelier-routage.py), [`routage-avant.jsonl`](td2/routage-avant.jsonl), [`routage-apres.jsonl`](td2/routage-apres.jsonl) |
 
 ## Step 1: the k-of-n vote
@@ -159,7 +159,7 @@ The 3-of-5 quorum removes one wrong consensus (C19) and recovers two correct val
 ## Contributions
 
 - Pair A (Step 1): Shayan Karimi, Etienne Padelo: `vote_k_sur_n`, `td2_vote_table.py`, the 2-of-3 vs 3-of-5 table and its analysis.
-- Pair B (Step 2): _to fill_.
+- Pair B (Step 2): completed. C10 is a wrong consensus: Cohere, Qwen and Dots returned 119410 instead of 558980 cents. Both 2-of-3 and 3-of-5 select the wrong value. Independent SQLite checks found 439570 missing cents across customers C004, C005, C007 and C022. Full SQL analysis: [`reports/td2/step2-wrong-consensus-pair-B.md`](td2/step2-wrong-consensus-pair-B.md).
 - Pair C (Step 3): _to fill_.
 
 ## Next steps
